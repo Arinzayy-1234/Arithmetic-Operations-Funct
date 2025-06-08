@@ -11,6 +11,9 @@ def main():
     while True:
         display_menu()
         choice = input("Enter your choice: ")
+        if choice != type(str):
+            print  ("Please enter a valid choice (1-4).")
+            continue
 
         if choice == '1':
             # Prompt for and add an item
