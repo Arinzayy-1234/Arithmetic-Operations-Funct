@@ -18,7 +18,7 @@ def main():
 
         if choice == '1':
             # Prompt for and add an item
-            add_item = input(" Enter the item to add:")
+            add_item = input(" Enter the item to add:").strip()
             shopping_list.append(add_item)
             
         elif choice == '2':
