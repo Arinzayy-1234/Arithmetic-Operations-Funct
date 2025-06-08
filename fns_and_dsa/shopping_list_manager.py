@@ -11,14 +11,14 @@ def main():
     while True:
         display_menu()
         choice = input("Enter your choice: ")
-        
+
         if choice not in ['1', '2', '3', '4']:
             print  ("Please enter a valid choice (1-4).")
             continue
 
         if choice == '1':
             # Prompt for and add an item
-            add_item = input("Enter Item name: ")
+            add_item = input(" Enter the item to add:")
             shopping_list.append(add_item)
             
         elif choice == '2':
