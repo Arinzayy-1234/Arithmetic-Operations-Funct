@@ -13,4 +13,6 @@ def fib(n):
         
 for n in range(1,11):
     print(f"{n} --> {fib(n)}")
-        
+
+print("This is the new feature")
+print("This is the new feature 2")
