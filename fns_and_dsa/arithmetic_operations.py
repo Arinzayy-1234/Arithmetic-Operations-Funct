@@ -1,6 +1,6 @@
 
 
-def perform_operation(x , y , action):
+def perform_operation(num1, num2, operation):
     if action == "add":
         return x + y
     elif action == "subtract":
