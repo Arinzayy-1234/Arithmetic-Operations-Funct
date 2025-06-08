@@ -11,7 +11,7 @@ def main():
     while True:
         display_menu()
         choice = input("Enter your choice: ")
-        if choice != type(str):
+        if choice != type(int):
             print  ("Please enter a valid choice (1-4).")
             continue
 
