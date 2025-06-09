@@ -20,6 +20,7 @@ def main():
             # Prompt for and add an item
             add_item = input(" Enter the item to add:").strip()
             shopping_list.append(add_item)
+            print(f"The item {add_item} has been added")
             
         elif choice == '2':
             # Prompt for and remove an item
@@ -28,6 +29,8 @@ def main():
             for item in shopping_list:
                 if remove_item == item:
                     del shopping_list[counter]
+                    print(f"The iten {remove_item} has been removed")
+                    break
                 else:
                     print("Item not found !!")
                 counter += 1
