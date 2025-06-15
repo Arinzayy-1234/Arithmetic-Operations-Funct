@@ -1,5 +1,11 @@
 
 import sys
+import os # Add this line
+print("--- sys.path ---")
+for p in sys.path:
+    print(p)
+print("----------------")
+print(f"Current working directory: {os.getcwd()}") # Add this line
 from programming_paradigm.robust_division_calculator import safe_divide
 
 def main():
