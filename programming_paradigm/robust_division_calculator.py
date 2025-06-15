@@ -3,9 +3,9 @@
 
 def safe_divide(numerator, denominator):
     
-    num_float = float(numerator)
-    denum_float = float(denominator)
     try:
+        num_float = float(numerator)
+        denum_float = float(denominator)
         return f'The result of the division is {num_float/denum_float}'
         
     
