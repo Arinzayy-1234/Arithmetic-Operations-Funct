@@ -16,7 +16,7 @@ class Book:
         else:
             return False # Indicates the book has been checked out already
              
-    def return_book_instance(self): # this returns the book that was checked out and returns True or doesn't do anything cause the book has already been returned or wasn't taken at all and returns False
+    def return_book(self): # this returns the book that was checked out and returns True or doesn't do anything cause the book has already been returned or wasn't taken at all and returns False
         if self._is_checked_out:
             self._is_checked_out = False
             return True #Indicates that the book has been returned
@@ -56,7 +56,7 @@ class Library:
                 break
         if found_book:
             if found_book._is_checked_out:
-                found_book.return_book_instance()
+                found_book.return_book()
                 print(f'Book {title} has been returned')
             else:
                 print(f'This Book {title} was never checked out')
