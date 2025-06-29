@@ -2,63 +2,90 @@
 
 # Are there any places that putting  try and except block will be good ?
 class Book:
-    _is_checked_out = False
+    
     
     def __init__(self,title,author):
         self.title = title
         self.author = author
+        self._is_checked_out = False
            
+    def check_out(self): # this checks the book out and returns True or doesn't do anything cause the book has already been checked out and returns False
+        if not self._is_checked_out:
+            self._is_checked_out = True
+            return True #checkout sucessful
+        else:
+            return False # Indicates the book has been checked out already
+             
+    def return_book_instance(self): # this returns the book that was checked out and returns True or doesn't do anything cause the book has already been returned or wasn't taken at all and returns False
+        if self._is_checked_out:
+            self._is_checked_out = False
+            return True #Indicates that the book has been returned
+        else:
+            return False # Book hasn't been taken yet
 class Library:
-    
-    _books = []
-    _books_inventory = []# this is a list to store all the books the library has. 
-    
     def __init__(self):
-        pass # should i even create this __init__ function , since i am not using it 
+        self._books = []
+    
+    def add_book(self,book_object):
+        if isinstance(book_object,Book): # Good practice: ensure it's a Book object
+            self._books.append(book_object)
+        else:
+            print(f'You can\'t add this {book_object}, only book objects can be added')
         
-        
-    def add_book(self,*book_objects): # should i and can i turn this to a lambda function
-        for book in book_objects:
-            Library._books.append(book)
-            Library._books_inventory.append(book)
-        
-    def check_out_book(self,title):
-        counter = 0
-        for book in Library._books:
-            counter += 1
+    def check_out_book(self,title): # this checks out a book it recieves and displays the status of a book, whether it has been checked out already, or it has just been succesfully checked out now or it doesn't  exists in the library  
+        found_book = None
+        for book in self._books:
             if book.title == title :
-                book._is_checked_out = True # here should i use the book class (i.e Book._is_checked_out)
-                
-                del Library._books[counter - 1] # is it okay to delete a list without using the bracket. And is the counter - 1 okay ? how do i make it more descriptive
+                found_book = book
+                break
+        if found_book:
+            if not found_book._is_checked_out:
+                found_book.check_out()
+                print(f'The book {title} has been checked out sucessfully')
             else:
-                continue
-        if not Book._is_checked_out: # here should i have used an object of book class (i.e book_1._is_checked_out) ?
-            print(f'The book doesn\'t exist')
+                print(f'The book {title} has already been checked out')
+        else:
+            print(f'This book {title} isn\'t in this library')
+
             
     def return_book(self,title):
-        returned = False # is this okay ?
-        for book in Library._books_inventory: # instead of creating another list _books_inventory, is there a way to just use _books list, i thought of 'slicing' but i don't know ?
+        found_book = None
+        for book in self._books:
             if book.title == title:
-                returned = True
-                Library._books.append(book)
-        if not returned:
-            print(f'This is not the library\'s book')
+                found_book = book
+                break
+        if found_book:
+            if found_book._is_checked_out:
+                found_book.return_book_instance()
+                print(f'Book {title} has been returned')
+            else:
+                print(f'This Book {title} was never checked out')
+        else:
+            print(f'This book {title} doesn\'t exist')
+        
+        
+        
         
     def list_available_books(self):
-        for book in Library._books:
-            print(f'{book.title} by {book.author}')
+        found_available = False
+        for book in self._books:
+            if not book._is_checked_out:
+                print(f'{book.title} by {book.author}')
+                found_available = True
+        if not found_available:
+            print(f'No books currently available.')
     
-"""         
+            
 book_1 = Book("Brave New World", "Aldous Huxley")
 book_2 = Book("1984", "George Orwell")
 library_1 = Library()
 
-library_1.add_book(book_1,book_2)
+library_1.add_book(book_1)
+library_1.add_book(book_2)
+
 library_1.list_available_books()
 
 library_1.check_out_book('1984')
-library_1.list_available_books()
-library_1.return_book('1984')
+
 library_1.list_available_books()
 
-"""
