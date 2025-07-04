@@ -7,6 +7,9 @@ class Book:
         self.author = author 
     def display_book(self):
         print(f'{self.title} by {self.author}')
+
+    def __str__(self):
+        return f'This is a book, Title -> {self.title}, Author -> {self.Author}'
     
 class EBook(Book):
     
